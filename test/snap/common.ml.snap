@@ -1,0 +1,65 @@
+>(*
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+> * Copyright (c) 2013 Jeremy Yallop.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> *
+#^^^ source.ocaml comment.block.ocaml
+> * This file is distributed under the terms of the MIT License.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> * See the file LICENSE for details.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> *)
+#^ source.ocaml comment.block.ocaml
+# ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>let string_of format v = 
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^^^^^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#             ^ source.ocaml meta.function.ocaml
+#              ^^^^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#                    ^ source.ocaml meta.function.ocaml
+#                     ^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#                      ^ source.ocaml meta.function.ocaml
+#                       ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+#                        ^^ source.ocaml
+>  let buf = Buffer.create 100 in
+#^^ source.ocaml
+#  ^^^ source.ocaml keyword.other.ocaml
+#     ^^^^^ source.ocaml
+#          ^ source.ocaml keyword.operator.infix.ocaml
+#           ^ source.ocaml
+#            ^^^^^^^ source.ocaml meta.module-reference.ocaml
+#                   ^^^^^^^ source.ocaml
+#                          ^^^ source.ocaml constant.numeric.integer.ocaml
+#                             ^ source.ocaml
+#                              ^^ source.ocaml keyword.other.ocaml
+>  let fmt = Format.formatter_of_buffer buf in begin
+#^^ source.ocaml
+#  ^^^ source.ocaml keyword.other.ocaml
+#     ^^^^^ source.ocaml
+#          ^ source.ocaml keyword.operator.infix.ocaml
+#           ^ source.ocaml
+#            ^^^^^^^ source.ocaml meta.module-reference.ocaml
+#                   ^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml
+#                                           ^^ source.ocaml keyword.other.ocaml
+#                                             ^ source.ocaml
+#                                              ^^^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>    format fmt v;
+#^^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>    Format.pp_print_flush fmt ();
+#^^^^ source.ocaml meta.begin-end-group.ocaml
+#    ^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.module-reference.ocaml
+#           ^^^^^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                              ^ source.ocaml meta.begin-end-group.ocaml constant.language.pseudo-variable.ocaml
+#                               ^ source.ocaml meta.begin-end-group.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.parens.ocaml
+#                                ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>    Buffer.contents buf
+#^^^^ source.ocaml meta.begin-end-group.ocaml
+#    ^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.module-reference.ocaml
+#           ^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+>  end
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>

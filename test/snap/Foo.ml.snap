@@ -1,0 +1,589 @@
+>(*
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+>    Copyright © 2011 MLstate
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>    This file is part of OPA.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>    OPA is free software: you can redistribute it and/or modify it under the
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>    terms of the GNU Affero General Public License, version 3, as published by
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>    the Free Software Foundation.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>    OPA is distributed in the hope that it will be useful, but WITHOUT ANY
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>    FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>    more details.
+#^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>    You should have received a copy of the GNU Affero General Public License
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>    along with OPA. If not, see <http://www.gnu.org/licenses/>.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>*)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+>    @author Louis Gesbert
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>**)
+#^ source.ocaml comment.block.ocaml
+# ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>type 'a t = ('a -> unit) -> unit
+#^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml keyword.other.type-definition.ocaml
+#    ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#     ^^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+#          ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml punctuation.separator.type-definition.ocaml
+#           ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#            ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml
+#             ^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#               ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml
+#                ^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml punctuation.separator.function-return.ocaml
+#                  ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml
+#                   ^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                       ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.paren-group.ocaml
+#                        ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#                         ^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml punctuation.separator.function-return.ocaml
+#                           ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#                            ^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+>
+>module Ops = struct
+#^^^^^^ source.ocaml meta.module.ocaml keyword.other.module-definition.ocaml
+#      ^ source.ocaml meta.module.ocaml
+#       ^^^ source.ocaml meta.module.ocaml entity.name.type.module.ocaml
+#          ^ source.ocaml
+#           ^ source.ocaml keyword.operator.infix.ocaml
+#            ^ source.ocaml
+#             ^^^^^^ source.ocaml meta.module.structure.ocaml keyword.other.module.structure.ocaml
+>  let (@>) f k = f k
+#^^ source.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                ^^^^^ source.ocaml meta.module.structure.ocaml
+>  let (|>) x k = k x
+#^^ source.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                ^^^^^ source.ocaml meta.module.structure.ocaml
+>end
+#^^^ source.ocaml meta.module.structure.ocaml keyword.other.module.structure.ocaml
+>open Ops
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>
+>module List = struct
+#^^^^^^ source.ocaml meta.module.ocaml keyword.other.module-definition.ocaml
+#      ^ source.ocaml meta.module.ocaml
+#       ^^^^ source.ocaml meta.module.ocaml entity.name.type.module.ocaml
+#           ^ source.ocaml
+#            ^ source.ocaml keyword.operator.infix.ocaml
+#             ^ source.ocaml
+#              ^^^^^^ source.ocaml meta.module.structure.ocaml keyword.other.module.structure.ocaml
+>  let rec map f l k = match l with
+#^^ source.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.funtion-definition.ocaml
+#          ^^^ source.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                 ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml
+#                      ^^^^^ source.ocaml meta.module.structure.ocaml keyword.control.ocaml
+#                           ^^^ source.ocaml meta.module.structure.ocaml
+#                              ^^^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>    | [] -> [] |> k
+#^^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#   ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml constant.language.pseudo-variable.ocaml
+#       ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+#        ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#         ^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml constant.language.pseudo-variable.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml
+#               ^^ source.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                 ^^^ source.ocaml meta.module.structure.ocaml
+>    | hd::tl -> f hd @> fun hd -> map f tl @> fun tl -> hd::tl |> k
+#^^^^ source.ocaml meta.module.structure.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#        ^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.definition.list.constructor.ocaml
+#          ^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#             ^^ source.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#               ^^^^^^ source.ocaml meta.module.structure.ocaml
+#                     ^^ source.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                        ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#                           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                            ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#                              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                               ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                                 ^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+#                                           ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#                                             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                                              ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#                                                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                                  ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#                                                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                                     ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                                                       ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                                                          ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml punctuation.definition.list.constructor.ocaml
+#                                                            ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                                                               ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#                                                                 ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+>
+>  let rec fold f acc l k = match l with
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml keyword.other.funtion-definition.ocaml
+#          ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml entity.name.function.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml variable.parameter.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml
+#                 ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml variable.parameter.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml variable.parameter.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml
+#                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml variable.parameter.ocaml
+#                        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml
+#                         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.ocaml keyword.operator.ocaml
+#                          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                           ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml keyword.control.ocaml
+#                                ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                                   ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>    | [] -> acc |> k
+#^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml
+#   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml
+#      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml constant.language.pseudo-variable.ocaml
+#       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+#        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml
+#         ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#           ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#                  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+>    | hd::tl -> f acc hd @> fun acc -> fold f acc tl @> k
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml
+#      ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#        ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml punctuation.definition.list.constructor.ocaml
+#          ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml
+#             ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#               ^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                         ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#                           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                            ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#                               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#                                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                    ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                                      ^^^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                                                     ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#                                                       ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+>end
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+>
+>module Option = struct
+#^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.ocaml keyword.other.module-definition.ocaml
+#      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.ocaml
+#       ^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.ocaml entity.name.type.module.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                ^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.other.module.structure.ocaml
+>  let rec map f opt k = match opt with
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.funtion-definition.ocaml
+#          ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                        ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.control.ocaml
+#                             ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                                  ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>    | None -> None |> k
+#^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#           ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#              ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml entity.name.type.variant.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                   ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                     ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+>    | Some x -> f x @> fun x -> Some x |> k
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#             ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#               ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                    ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                       ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#                          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#                            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                             ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+#                                ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml entity.name.type.variant.ocaml
+#                                    ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+#                                       ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#                                         ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+>end
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+>
+>module Lazy = struct
+#^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.ocaml keyword.other.module-definition.ocaml
+#      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.ocaml
+#       ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.ocaml entity.name.type.module.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml keyword.operator.infix.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+#              ^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.other.module.structure.ocaml
+>  type 'a t = {
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml
+#  ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml keyword.other.type-definition.ocaml
+#      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#       ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml punctuation.separator.type-definition.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+>    push : (unit -> unit) -> unit;
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml
+#    ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml source.ocaml
+#        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml punctuation.definition.record.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#            ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                 ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml punctuation.separator.function-return.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                    ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                          ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml punctuation.separator.function-return.ocaml
+#                            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                             ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml storage.type.ocaml
+#                                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml keyword.operator.ocaml
+>    mutable value : 'a option;
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml
+#    ^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml keyword.other.storage.modifier.ocaml
+#            ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml source.ocaml
+#                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml punctuation.definition.record.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                    ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml storage.type.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                       ^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml storage.type.ocaml
+#                             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml keyword.operator.ocaml
+>    mutable waiters : ('a -> unit) list;
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml
+#    ^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml keyword.other.storage.modifier.ocaml
+#            ^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml source.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml punctuation.definition.record.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                       ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                          ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml punctuation.separator.function-return.ocaml
+#                            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                             ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                                   ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml storage.type.ocaml
+#                                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml keyword.operator.ocaml
+>    cps : ('a -> unit) -> unit;
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml
+#    ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml source.ocaml
+#       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml punctuation.definition.record.ocaml
+#         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#           ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#              ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml punctuation.separator.function-return.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                 ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml meta.paren-group.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                       ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml punctuation.separator.function-return.ocaml
+#                         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml
+#                          ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml storage.type.ocaml
+#                              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml meta.record.definition.ocaml keyword.operator.ocaml
+>  }
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml
+#  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+>
+>  let make push cps = {
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#           ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+>    push = push;
+#^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#          ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>    value = None;
+#^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#            ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml entity.name.type.variant.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>    waiters = [];
+#^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml constant.language.pseudo-variable.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>    cps = cps;
+#^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#         ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>  }
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+>
+>  let force l k =
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+>    match l.value with
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#    ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.control.ocaml
+#         ^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                  ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>    | Some x -> x |> k
+#^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#             ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#               ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                  ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                    ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+>    | None when l.waiters != [] ->
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#           ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-condition.ocaml
+#               ^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                          ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.symbol.ocaml
+#                            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml constant.language.pseudo-variable.ocaml
+#                              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+#                               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                                ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml punctuation.separator.function-return.ocaml
+>        l.waiters <- k::l.waiters
+#^^^^^^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.symbol.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                    ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                      ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml punctuation.definition.list.constructor.ocaml
+#                        ^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+>    | None ->
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#      ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml
+#           ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>        l.waiters <- k::l.waiters;
+#^^^^^^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.symbol.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                    ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                      ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml punctuation.definition.list.constructor.ocaml
+#                        ^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml punctuation.separator.ocaml
+>        l.cps
+#^^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+>        @> function x ->
+#^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#        ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#           ^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#                   ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.pattern-match.ocaml keyword.other.function-definition.ocaml
+>          Base.List.iter (fun k -> l.push (fun () -> k x)) l.waiters;
+#^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#          ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.module-reference.ocaml
+#               ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.module-reference.ocaml
+#                    ^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                          ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#                             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#                               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                                  ^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml
+#                                          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                                           ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#                                              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                               ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.unit.ocaml
+#                                                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                                                  ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                                                    ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml
+#                                                        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                                                         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                                                          ^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                                                                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml punctuation.separator.ocaml
+>          l.value <- Some x;
+#^^^^^^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.symbol.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                     ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml entity.name.type.variant.ocaml
+#                         ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml punctuation.separator.ocaml
+>          l.waiters <- []
+#^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.symbol.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml keyword.operator.infix.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml constant.language.pseudo-variable.ocaml
+#                        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+>
+>  let get_state cps = cps.value
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                     ^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+>
+>  let lazy_from_val x = {
+#^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#  ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#      ^^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml entity.name.function.ocaml
+#                   ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml variable.parameter.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.ocaml keyword.operator.ocaml
+#                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml
+#                        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+>    push = (fun _ -> ());
+#^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#            ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#                 ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                  ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                    ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml
+#                     ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml constant.language.pseudo-variable.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.parens.ocaml
+#                       ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#                        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>    value = Some x;
+#^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#          ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#           ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#            ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml entity.name.type.variant.ocaml
+#                ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#                  ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>    waiters = [];
+#^^^^^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#            ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml constant.language.pseudo-variable.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.ocaml
+#                ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml punctuation.separator.ocaml
+>    cps = fun k -> k x;
+#^^^^^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml
+#        ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#         ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml punctuation.definition.function.anonymous.ocaml
+#          ^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml keyword.other.function-definition.ocaml
+#             ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#              ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml variable.parameter.ocaml
+#               ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml
+#                ^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml meta.function.anonymous.definition.ocaml punctuation.separator.function-definition.ocaml
+#                  ^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml
+#                      ^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml punctuation.separator.ocaml
+>  }
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml
+>end
+#^^^^ source.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.function.anonymous.ocaml meta.module.structure.ocaml meta.record.ocaml meta.function.anonymous.ocaml
+>

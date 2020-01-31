@@ -1,0 +1,348 @@
+>(*
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+> * Copyright (c) 2013 Jeremy Yallop.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> *
+#^^^ source.ocaml comment.block.ocaml
+> * This file is distributed under the terms of the MIT License.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> * See the file LICENSE for details.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> *)
+#^ source.ocaml comment.block.ocaml
+# ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>open Ctypes
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open PosixTypes
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^^^^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open Foreign
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>
+>type tm
+#^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml keyword.other.type-definition.ocaml
+#    ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#     ^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+>let tm = structure "tm"
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^ source.ocaml
+#       ^ source.ocaml keyword.operator.infix.ocaml
+#        ^^^^^^^^^^^ source.ocaml
+#                   ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                    ^^ source.ocaml string.quoted.double.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+>let (-:) ty label = field tm label ty
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#        ^ source.ocaml meta.function.ocaml
+#         ^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#           ^ source.ocaml meta.function.ocaml
+#            ^^^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#                 ^ source.ocaml meta.function.ocaml
+#                  ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+#                   ^^^^^^^^^^^^^^^^^^^ source.ocaml
+>let tm_sec   = int -: "tm_sec"   (* seconds *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^ source.ocaml string.quoted.double.ocaml
+#                             ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                              ^^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                            ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_min   = int -: "tm_min"   (* minutes *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^ source.ocaml string.quoted.double.ocaml
+#                             ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                              ^^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                            ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_hour  = int -: "tm_hour"  (* hours *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                              ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                               ^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^ source.ocaml comment.block.ocaml
+#                                          ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_mday  = int -: "tm_mday"  (* day of the month *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                              ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                               ^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                     ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_mon   = int -: "tm_mon"   (* month *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^ source.ocaml string.quoted.double.ocaml
+#                             ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                              ^^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^ source.ocaml comment.block.ocaml
+#                                          ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_year  = int -: "tm_year"  (* year *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                              ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                               ^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^ source.ocaml comment.block.ocaml
+#                                         ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_wday  = int -: "tm_wday"  (* day of the week *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                              ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                               ^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                    ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_yday  = int -: "tm_yday"  (* day in the year *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                              ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                               ^^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                    ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let tm_isdst = int -: "tm_isdst" (* daylight saving time *)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^ source.ocaml
+#             ^ source.ocaml keyword.operator.infix.ocaml
+#              ^ source.ocaml
+#               ^^^ source.ocaml storage.type.ocaml
+#                  ^ source.ocaml
+#                   ^^ source.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                               ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                ^ source.ocaml
+#                                 ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#                                   ^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                         ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let () = seal (tm : tm structure typ)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^ source.ocaml
+#    ^ source.ocaml constant.language.pseudo-variable.ocaml
+#     ^ source.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.parens.ocaml
+#      ^ source.ocaml
+#       ^ source.ocaml keyword.operator.infix.ocaml
+#        ^^^^^^ source.ocaml
+#              ^ source.ocaml meta.type-constraint.ocaml punctuation.section.type-constraint.ocaml
+#               ^^^ source.ocaml meta.type-constraint.ocaml
+#                  ^ source.ocaml meta.type-constraint.ocaml punctuation.separator.type-constraint.ocaml
+#                   ^^^^^^^^^^^^^^^^^ source.ocaml meta.type-constraint.ocaml storage.type.ocaml
+#                                    ^ source.ocaml meta.type-constraint.ocaml punctuation.section.type-constraint.ocaml
+>
+>let time = foreign "time" ~check_errno:true (ptr time_t @-> returning time_t)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^ source.ocaml
+#         ^ source.ocaml keyword.operator.infix.ocaml
+#          ^^^^^^^^^ source.ocaml
+#                   ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                    ^^^^ source.ocaml string.quoted.double.ocaml
+#                        ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                         ^ source.ocaml
+#                          ^^^^^^^^^^^^ source.ocaml entity.name.tag.label.ocaml
+#                                      ^ source.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                                       ^^^^ source.ocaml constant.language.boolean.ocaml
+#                                           ^ source.ocaml
+#                                            ^ source.ocaml meta.paren-group.ocaml
+#                                             ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                        ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                                           ^^^^^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                                            ^ source.ocaml meta.paren-group.ocaml
+>
+>let asctime = foreign "asctime" (ptr tm @-> returning string)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^ source.ocaml
+#            ^ source.ocaml keyword.operator.infix.ocaml
+#             ^^^^^^^^^ source.ocaml
+#                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                       ^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                              ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                               ^ source.ocaml
+#                                ^ source.ocaml meta.paren-group.ocaml
+#                                 ^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                        ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                           ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                      ^^^^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                                            ^ source.ocaml meta.paren-group.ocaml
+>
+>let localtime = foreign "localtime" (ptr time_t @-> returning (ptr tm))
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^^ source.ocaml
+#              ^ source.ocaml keyword.operator.infix.ocaml
+#               ^^^^^^^^^ source.ocaml
+#                        ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                         ^^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                                  ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                   ^ source.ocaml
+#                                    ^ source.ocaml meta.paren-group.ocaml
+#                                     ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                                   ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                              ^ source.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                               ^^^^^^ source.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                                     ^ source.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                                      ^ source.ocaml meta.paren-group.ocaml
+>
+>let () = begin
+#^^^ source.ocaml keyword.other.ocaml
+#   ^ source.ocaml
+#    ^ source.ocaml constant.language.pseudo-variable.ocaml
+#     ^ source.ocaml constant.language.pseudo-variable.ocaml meta.empty-typing-pair.parens.ocaml
+#      ^ source.ocaml
+#       ^ source.ocaml keyword.operator.infix.ocaml
+#        ^ source.ocaml
+#         ^^^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>  let timep = allocate_n ~count:1 time_t in
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+#     ^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#            ^ source.ocaml meta.begin-end-group.ocaml keyword.operator.infix.ocaml
+#             ^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                         ^^^^^^ source.ocaml meta.begin-end-group.ocaml entity.name.tag.label.ocaml
+#                               ^ source.ocaml meta.begin-end-group.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                                ^ source.ocaml meta.begin-end-group.ocaml constant.numeric.integer.ocaml
+#                                 ^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                                         ^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+>  let time = time timep in
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+#     ^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#           ^ source.ocaml meta.begin-end-group.ocaml keyword.operator.infix.ocaml
+#            ^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                        ^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+>  assert (time = !@timep);
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^^^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+#        ^ source.ocaml meta.begin-end-group.ocaml
+#         ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#          ^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#               ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                 ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.prefix.ocaml
+#                  ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                   ^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                        ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                         ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>  let tm = localtime timep in
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+#     ^^^^ source.ocaml meta.begin-end-group.ocaml
+#         ^ source.ocaml meta.begin-end-group.ocaml keyword.operator.infix.ocaml
+#          ^^^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                           ^^ source.ocaml meta.begin-end-group.ocaml keyword.other.ocaml
+>  Printf.printf "tm.tm_mon  = %d\n" (getf !@tm tm_mon);
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.module-reference.ocaml
+#         ^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                ^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                 ^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml
+#                                ^^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml constant.character.string.escape.ocaml
+#                                  ^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                   ^ source.ocaml meta.begin-end-group.ocaml
+#                                    ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                     ^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                          ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.prefix.ocaml
+#                                           ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                            ^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                                     ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                                      ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>  Printf.printf "tm.tm_year = %d\n" (getf !@tm tm_year);
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.module-reference.ocaml
+#         ^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                ^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                 ^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml
+#                                ^^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml constant.character.string.escape.ocaml
+#                                  ^ source.ocaml meta.begin-end-group.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                   ^ source.ocaml meta.begin-end-group.ocaml
+#                                    ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                     ^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                          ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.prefix.ocaml
+#                                           ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                            ^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                                      ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                                                       ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>  print_endline (asctime tm)
+#^^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#                ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                 ^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                           ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+>end
+#^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>

@@ -1,0 +1,315 @@
+>(*
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+> * Copyright (c) 2013 Jeremy Yallop.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> *
+#^^^ source.ocaml comment.block.ocaml
+> * This file is distributed under the terms of the MIT License.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> * See the file LICENSE for details.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+> *)
+#^ source.ocaml comment.block.ocaml
+# ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>open PosixTypes
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^^^^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open Ctypes
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open Foreign
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>
+>type t = sigset_t ptr
+#^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml keyword.other.type-definition.ocaml
+#    ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#     ^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+#       ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml punctuation.separator.type-definition.ocaml
+#        ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#         ^^^^^^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+#                 ^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml
+#                  ^^^ source.ocaml meta.type-definition-group.ocaml meta.type-definition.ocaml storage.type.ocaml
+>
+>let t = ptr sigset_t
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^ source.ocaml
+#      ^ source.ocaml keyword.operator.infix.ocaml
+#       ^^^^^^^^^^^^^^ source.ocaml
+>
+>(* This function initializes the signal set set to exclude all of the defined
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   signals. It always returns 0.  *)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                  ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let sigemptyset = foreign "sigemptyset" (ptr sigset_t @-> returning int)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^^^^ source.ocaml
+#                ^ source.ocaml keyword.operator.infix.ocaml
+#                 ^^^^^^^^^ source.ocaml
+#                          ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                           ^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                       ^ source.ocaml
+#                                        ^ source.ocaml meta.paren-group.ocaml
+#                                         ^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                      ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                                         ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                                    ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                                                       ^ source.ocaml meta.paren-group.ocaml
+>
+>let empty () =
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#         ^ source.ocaml meta.function.ocaml
+#          ^^ source.ocaml meta.function.ocaml variable.parameter.unit.ocaml
+#            ^ source.ocaml meta.function.ocaml
+#             ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+>  let setp = allocate_n ~count:1 sigset_t in begin
+#^^ source.ocaml
+#  ^^^ source.ocaml keyword.other.ocaml
+#     ^^^^^^ source.ocaml
+#           ^ source.ocaml keyword.operator.infix.ocaml
+#            ^^^^^^^^^^^^ source.ocaml
+#                        ^^^^^^ source.ocaml entity.name.tag.label.ocaml
+#                              ^ source.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                               ^ source.ocaml constant.numeric.integer.ocaml
+#                                ^^^^^^^^^^ source.ocaml
+#                                          ^^ source.ocaml keyword.other.ocaml
+#                                            ^ source.ocaml
+#                                             ^^^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>    ignore (sigemptyset setp);
+#^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#           ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#            ^^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                            ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                             ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>    setp
+#^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+>  end
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>
+>(* This function initializes the signal set set to include all of the defined
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   signals. Again, the return value is 0. *)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                          ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let sigfillset = foreign "sigfillset" (ptr sigset_t @-> returning int)
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^^^ source.ocaml
+#               ^ source.ocaml keyword.operator.infix.ocaml
+#                ^^^^^^^^^ source.ocaml
+#                         ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                          ^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                                    ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                     ^ source.ocaml
+#                                      ^ source.ocaml meta.paren-group.ocaml
+#                                       ^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                    ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                                       ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                                  ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                                                     ^ source.ocaml meta.paren-group.ocaml
+>
+>let full () =
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#        ^ source.ocaml meta.function.ocaml
+#         ^^ source.ocaml meta.function.ocaml variable.parameter.unit.ocaml
+#           ^ source.ocaml meta.function.ocaml
+#            ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+>  let setp = allocate_n ~count:1 sigset_t in begin
+#^^ source.ocaml
+#  ^^^ source.ocaml keyword.other.ocaml
+#     ^^^^^^ source.ocaml
+#           ^ source.ocaml keyword.operator.infix.ocaml
+#            ^^^^^^^^^^^^ source.ocaml
+#                        ^^^^^^ source.ocaml entity.name.tag.label.ocaml
+#                              ^ source.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                               ^ source.ocaml constant.numeric.integer.ocaml
+#                                ^^^^^^^^^^ source.ocaml
+#                                          ^^ source.ocaml keyword.other.ocaml
+#                                            ^ source.ocaml
+#                                             ^^^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>    ignore (sigfillset setp);
+#^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+#           ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#            ^^^^^^^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                           ^ source.ocaml meta.begin-end-group.ocaml meta.paren-group.ocaml
+#                            ^ source.ocaml meta.begin-end-group.ocaml punctuation.separator.ocaml
+>    setp
+#^^^^^^^^^ source.ocaml meta.begin-end-group.ocaml
+>  end
+#^^ source.ocaml meta.begin-end-group.ocaml
+#  ^^^ source.ocaml meta.begin-end-group.ocaml keyword.control.begin-end.ocaml
+>
+>(* This function adds the signal signum to the signal set set. All sigaddset
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   does is modify set; it does not block or unblock any signals.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>   The return value is 0 on success and -1 on failure. The following errno
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   error condition is defined for this function:
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>   EINVAL The signum argument doesn't specify a valid signal. 
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>*)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let sigaddset = foreign "sigaddset" ~check_errno:true
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^^ source.ocaml
+#              ^ source.ocaml keyword.operator.infix.ocaml
+#               ^^^^^^^^^ source.ocaml
+#                        ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                         ^^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                                  ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                   ^ source.ocaml
+#                                    ^^^^^^^^^^^^ source.ocaml entity.name.tag.label.ocaml
+#                                                ^ source.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                                                 ^^^^ source.ocaml constant.language.boolean.ocaml
+>  (ptr sigset_t @-> int @-> returning int)
+#^^ source.ocaml
+#  ^ source.ocaml meta.paren-group.ocaml
+#   ^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                   ^ source.ocaml meta.paren-group.ocaml
+#                    ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                       ^ source.ocaml meta.paren-group.ocaml
+#                        ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                           ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                      ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                         ^ source.ocaml meta.paren-group.ocaml
+>
+>let add set signal = ignore (sigaddset set signal)
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#       ^ source.ocaml meta.function.ocaml
+#        ^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#           ^ source.ocaml meta.function.ocaml
+#            ^^^^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#                  ^ source.ocaml meta.function.ocaml
+#                   ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+#                    ^^^^^^^^ source.ocaml
+#                            ^ source.ocaml meta.paren-group.ocaml
+#                             ^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                 ^ source.ocaml meta.paren-group.ocaml
+>
+>(* This function removes the signal signum from the signal set set. All
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   sigdelset does is modify set; it does not block or unblock any signals.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>   The return value and error conditions are the same as for
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   sigaddset.  *)
+#^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#               ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let sigdelset = foreign "sigdelset" ~check_errno:true
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^^ source.ocaml
+#              ^ source.ocaml keyword.operator.infix.ocaml
+#               ^^^^^^^^^ source.ocaml
+#                        ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                         ^^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                                  ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                   ^ source.ocaml
+#                                    ^^^^^^^^^^^^ source.ocaml entity.name.tag.label.ocaml
+#                                                ^ source.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                                                 ^^^^ source.ocaml constant.language.boolean.ocaml
+>  (ptr sigset_t @-> int @-> returning int)
+#^^ source.ocaml
+#  ^ source.ocaml meta.paren-group.ocaml
+#   ^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                   ^ source.ocaml meta.paren-group.ocaml
+#                    ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                       ^ source.ocaml meta.paren-group.ocaml
+#                        ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                           ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                      ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                         ^ source.ocaml meta.paren-group.ocaml
+>
+>let del set signal = ignore (sigdelset set signal)
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#       ^ source.ocaml meta.function.ocaml
+#        ^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#           ^ source.ocaml meta.function.ocaml
+#            ^^^^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#                  ^ source.ocaml meta.function.ocaml
+#                   ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+#                    ^^^^^^^^ source.ocaml
+#                            ^ source.ocaml meta.paren-group.ocaml
+#                             ^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                                 ^ source.ocaml meta.paren-group.ocaml
+>
+>(* The sigismember function tests whether the signal signum is a member of the
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   signal set set. It returns 1 if the signal is in the set, 0 if not, and -1 if
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   there is an error.
+#^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>   The following errno error condition is defined for this function:
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>   EINVAL The signum argument doesn't specify a valid signal. 
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>*)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>let sigismember = foreign "sigismember" ~check_errno:true
+#^^^ source.ocaml keyword.other.ocaml
+#   ^^^^^^^^^^^^^ source.ocaml
+#                ^ source.ocaml keyword.operator.infix.ocaml
+#                 ^^^^^^^^^ source.ocaml
+#                          ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
+#                           ^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
+#                                      ^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
+#                                       ^ source.ocaml
+#                                        ^^^^^^^^^^^^ source.ocaml entity.name.tag.label.ocaml
+#                                                    ^ source.ocaml entity.name.tag.label.ocaml punctuation.separator.argument-label.ocaml
+#                                                     ^^^^ source.ocaml constant.language.boolean.ocaml
+>  (ptr sigset_t @-> int @-> returning int)
+#^^ source.ocaml
+#  ^ source.ocaml meta.paren-group.ocaml
+#   ^^^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                   ^ source.ocaml meta.paren-group.ocaml
+#                    ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                       ^ source.ocaml meta.paren-group.ocaml
+#                        ^^^ source.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                           ^^^^^^^^^^^ source.ocaml meta.paren-group.ocaml
+#                                      ^^^ source.ocaml meta.paren-group.ocaml storage.type.ocaml
+#                                         ^ source.ocaml meta.paren-group.ocaml
+>
+>let mem set signal = sigismember set signal <> 0
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#       ^ source.ocaml meta.function.ocaml
+#        ^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#           ^ source.ocaml meta.function.ocaml
+#            ^^^^^^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#                  ^ source.ocaml meta.function.ocaml
+#                   ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml
+#                                            ^ source.ocaml keyword.operator.symbol.ocaml
+#                                             ^ source.ocaml keyword.operator.symbol.ocaml
+#                                              ^ source.ocaml
+#                                               ^ source.ocaml constant.numeric.integer.ocaml
+>

@@ -1,0 +1,776 @@
+>(***********************************************************************)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*                                                                     *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*                                OCaml                                *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*                                                                     *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*            Xavier Leroy, projet Cristal, INRIA Rocquencourt         *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*                                                                     *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*  Copyright 2000 Institut National de Recherche en Informatique et   *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*  en Automatique.  All rights reserved.  This file is distributed    *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*  under the terms of the Q Public License version 1.0.               *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(*                                                                     *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>(***********************************************************************)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                                                                       ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>open Cmm
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open Arch
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open Reg
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>open Mach
+#^^^^ source.ocaml meta.module.open.ocaml keyword.other.ocaml
+#    ^ source.ocaml meta.module.open.ocaml
+#     ^^^^ source.ocaml meta.module.open.ocaml support.other.module.ocaml
+>
+>(* Reloading for the AMD64 *)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+#                           ^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>(* Summary of instruction set constraints:
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   "S" means either stack or register, "R" means register only.
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>   Operation                    Res     Arg1    Arg2
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Imove                      R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>                             or S       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iconst_int                 S if 32-bit signed, R otherwise
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iconst_float               R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iconst_symbol (not PIC)    S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iconst_symbol (PIC)        R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Icall_ind                          R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Itailcall_ind                      R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iload                      R       R       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Istore                             R       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintop(Icomp)              R       R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>                            or  S       S       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintop(Imul|Idiv|mod)      R       R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintop(shift)              S       S       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintop(others)             R       R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>                            or  S       S       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintop_imm(Iadd, n)/lea    R       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintop_imm(others)         S       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Inegf...Idivf              R       R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Ifloatofint                R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iintoffloat                R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Ispecific(Ilea)            R       R       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Ispecific(Ifloatarithmem)  R       R       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>
+>   Conditional branches:
+#^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Iinttest                           S       R
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>                                    or  R       S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     Ifloattest                         R       S    (or  S R if swapped test)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>     other tests                        S
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml comment.block.ocaml
+>*)
+#^^ source.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>
+>let stackp r =
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#          ^ source.ocaml meta.function.ocaml
+#           ^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#            ^ source.ocaml meta.function.ocaml
+#             ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+>  match r.loc with
+#^^ source.ocaml
+#  ^^^^^ source.ocaml keyword.control.ocaml
+#       ^^^^^^^ source.ocaml
+#              ^^^^ source.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>    Stack _ -> true
+#^^^^ source.ocaml meta.pattern-match.ocaml
+#    ^^^^^ source.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#         ^ source.ocaml meta.pattern-match.ocaml
+#          ^ source.ocaml meta.pattern-match.ocaml constant.language.universal-match.ocaml
+#           ^ source.ocaml meta.pattern-match.ocaml
+#            ^^ source.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#              ^ source.ocaml
+#               ^^^^ source.ocaml constant.language.boolean.ocaml
+>  | _ -> false
+#^^ source.ocaml
+#  ^ source.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.pattern-match.ocaml constant.language.universal-match.ocaml
+#     ^ source.ocaml meta.pattern-match.ocaml
+#      ^^ source.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#        ^ source.ocaml
+#         ^^^^^ source.ocaml constant.language.boolean.ocaml
+>
+>class reload = object (self)
+#^^^^^ source.ocaml meta.class.ocaml keyword.other.class-definition.ocaml
+#     ^ source.ocaml meta.class.ocaml
+#      ^^^^^^ source.ocaml meta.class.ocaml entity.name.type.class.ocaml
+#            ^ source.ocaml meta.class.ocaml
+#             ^ source.ocaml meta.class.ocaml keyword.operator.ocaml
+#              ^ source.ocaml
+#               ^^^^^^ source.ocaml meta.object.ocaml keyword.other.object-definition.ocaml
+#                     ^ source.ocaml meta.object.ocaml
+#                      ^ source.ocaml meta.object.ocaml punctuation.definition.self-binding.ocaml
+#                       ^^^^ source.ocaml meta.object.ocaml entity.name.type.self-binding.ocaml
+#                           ^ source.ocaml meta.object.ocaml punctuation.definition.self-binding.ocaml
+>
+>inherit Reloadgen.reload_generic as super
+#^^^^^^^ source.ocaml meta.object.ocaml keyword.other.ocaml
+#       ^ source.ocaml meta.object.ocaml
+#        ^^^^^^^^^^ source.ocaml meta.object.ocaml meta.module-reference.ocaml
+#                  ^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                                 ^^ source.ocaml meta.object.ocaml keyword.other.ocaml
+#                                   ^^^^^^^ source.ocaml meta.object.ocaml
+>
+>method! reload_operation op arg res =
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^ source.ocaml meta.object.ocaml keyword.operator.prefix.ocaml
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                                    ^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+>  match op with
+#^^ source.ocaml meta.object.ocaml
+#  ^^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#       ^^^^ source.ocaml meta.object.ocaml
+#           ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>  | Iintop(Iadd|Isub|Iand|Ior|Ixor|Icomp _|Icheckbound) ->
+#^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+# ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#           ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                     ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                         ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                          ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                             ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                              ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                                  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                                   ^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml
+#                                         ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml constant.language.universal-match.ocaml
+#                                          ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                                           ^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                                                      ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                                                       ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                                        ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* One of the two arguments can reside in the stack, but not both *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                                        ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      if stackp arg.(0) && stackp arg.(1)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                       ^ source.ocaml meta.object.ocaml
+#                        ^^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#                          ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                       ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      then ([|arg.(0); self#makereg arg.(1)|], res)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#              ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                   ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.separator.ocaml
+#                      ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                            ^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.method-call.ocaml
+#                                   ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                         ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                          ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                           ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+#                                             ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                                  ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      else (arg, res)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>  | Iintop_imm(Iadd, _) when arg.(0).loc <> res.(0).loc ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#              ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml
+#               ^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml variable.parameter.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml
+#                       ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                        ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-condition.ocaml
+#                            ^^^^^ source.ocaml meta.object.ocaml
+#                                 ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                  ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                   ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                    ^^^^^ source.ocaml meta.object.ocaml
+#                                         ^ source.ocaml meta.object.ocaml keyword.operator.symbol.ocaml
+#                                          ^ source.ocaml meta.object.ocaml keyword.operator.symbol.ocaml
+#                                           ^^^^^ source.ocaml meta.object.ocaml
+#                                                ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                                 ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                                  ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                                   ^^^^^ source.ocaml meta.object.ocaml
+#                                                        ^^ source.ocaml meta.object.ocaml punctuation.separator.function-return.ocaml
+>      (* This add will be turned into a lea; args and results must be
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+>         in registers *)
+#^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      super#reload_operation op arg res
+#^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#            ^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.method-call.ocaml
+#                            ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+>  | Iintop(Idiv | Imod | Ilsl | Ilsr | Iasr)
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#   ^ source.ocaml meta.object.ocaml
+#    ^^^^^^ source.ocaml meta.object.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#           ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml entity.name.type.variant.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                 ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                  ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml entity.name.type.variant.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                       ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                         ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml entity.name.type.variant.ocaml
+#                             ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                              ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                               ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml entity.name.type.variant.ocaml
+#                                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                       ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml entity.name.type.variant.ocaml
+#                                           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>  | Iintop_imm(_, _) ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#              ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml variable.parameter.ocaml
+#                ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml variable.parameter.ocaml
+#                   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.paren-group.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                     ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* The argument(s) and results can be either in register or on stack *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                                           ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      (* Note: Idiv, Imod: arg(0) and res(0) already forced in regs
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+>               Ilsl, Ilsr, Iasr: arg(1) already forced in regs *)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                               ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      (arg, res)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#       ^^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>  | Iintop(Imul) | Iaddf | Isubf | Imulf | Idivf ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#          ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#           ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                 ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                   ^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#                        ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                         ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#                          ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                           ^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#                                ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                 ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#                                  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                   ^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                         ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#                                          ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                           ^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#                                                ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                                 ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* First argument (= result) must be in register, second arg
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+>         can reside in the stack *)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                 ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      if stackp arg.(0)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      then (let r = self#makereg arg.(0) in ([|r; arg.(1)|], [|r|]))
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.other.ocaml
+#               ^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
+#                   ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                         ^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.method-call.ocaml
+#                                ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                       ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                         ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml keyword.other.ocaml
+#                                           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                            ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                             ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#                                               ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                                ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.separator.ocaml
+#                                                 ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                                       ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                                         ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+#                                                           ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                             ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#                                                               ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                                                ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+#                                                                  ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                                   ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      else (arg, res)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>  | Ifloatofint | Iintoffloat ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#                 ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                  ^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#                             ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                              ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* Result must be in register, but argument can be on stack *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                                  ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      (arg, (if stackp res.(0) then [| self#makereg res.(0) |] else res))
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#       ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#             ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.control.ocaml
+#               ^^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                            ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                             ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                              ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                               ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.control.ocaml
+#                                   ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                    ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#                                      ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                                            ^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.method-call.ocaml
+#                                                   ^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                                         ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                                          ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                                           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml
+#                                                            ^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+#                                                              ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                               ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.control.ocaml
+#                                                                   ^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                                       ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#                                                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>  | Iconst_int n ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#              ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                 ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      if n <= 0x7FFFFFFFn && n >= -0x80000000n
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^^^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml keyword.operator.symbol.ocaml
+#            ^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#             ^ source.ocaml meta.object.ocaml
+#              ^^^^^^^^^^^ source.ocaml meta.object.ocaml constant.numeric.integer.nativeint.ocaml
+#                         ^ source.ocaml meta.object.ocaml
+#                          ^^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#                            ^^^ source.ocaml meta.object.ocaml
+#                               ^ source.ocaml meta.object.ocaml keyword.operator.symbol.ocaml
+#                                ^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#                                 ^ source.ocaml meta.object.ocaml
+#                                  ^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#                                   ^^^^^^^^^^^ source.ocaml meta.object.ocaml constant.numeric.integer.nativeint.ocaml
+>      then (arg, res)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      else super#reload_operation op arg res
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^^^^^^ source.ocaml meta.object.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                 ^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.method-call.ocaml
+#                                 ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+>  | Iconst_symbol _ ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#                 ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml constant.language.universal-match.ocaml
+#                   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                    ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      if !pic_code || !Clflags.dlcode
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^ source.ocaml meta.object.ocaml
+#         ^ source.ocaml meta.object.ocaml keyword.operator.prefix.ocaml
+#          ^^^^^^^^^ source.ocaml meta.object.ocaml
+#                   ^^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#                     ^ source.ocaml meta.object.ocaml
+#                      ^ source.ocaml meta.object.ocaml keyword.operator.prefix.ocaml
+#                       ^^^^^^^^ source.ocaml meta.object.ocaml meta.module-reference.ocaml
+#                               ^^^^^^^ source.ocaml meta.object.ocaml
+>      then super#reload_operation op arg res
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^^^^^^ source.ocaml meta.object.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                 ^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.method-call.ocaml
+#                                 ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+>      else (arg, res)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#            ^^^^^^^^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>  | _ -> (* Other operations: all args and results in registers *)
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml constant.language.universal-match.ocaml
+#     ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#      ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+#        ^ source.ocaml meta.object.ocaml
+#         ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                                ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      super#reload_operation op arg res
+#^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#           ^ source.ocaml meta.object.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#            ^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml meta.method-call.ocaml
+#                            ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+>
+>method! reload_test tst arg =
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^ source.ocaml meta.object.ocaml keyword.operator.prefix.ocaml
+#       ^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                            ^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+>  match tst with
+#^^ source.ocaml meta.object.ocaml
+#  ^^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#       ^^^^^ source.ocaml meta.object.ocaml
+#            ^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+>    Iinttest cmp ->
+#^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#            ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#             ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml variable.parameter.ocaml
+#                ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                 ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* One of the two arguments can reside on stack *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      if stackp arg.(0) && stackp arg.(1)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                       ^ source.ocaml meta.object.ocaml
+#                        ^^ source.ocaml meta.object.ocaml keyword.operator.infix.ocaml
+#                          ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                                       ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      then [| self#makereg arg.(0); arg.(1) |]
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#             ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                   ^^^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml meta.method-call.ocaml
+#                          ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                               ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                 ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                  ^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.separator.ocaml
+#                                   ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                         ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                          ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                           ^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                                            ^^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+>      else arg
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^^^^^ source.ocaml meta.object.ocaml
+>  | Ifloattest((Clt|Cle), _) ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#              ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                    ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                       ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                        ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml
+#                          ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml constant.language.universal-match.ocaml
+#                           ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                            ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                             ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* Cf. emit.mlp: we swap arguments in this case *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      (* First argument can be on stack, second must be in register *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                                    ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      if stackp arg.(1)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      then [| arg.(0); self#makereg arg.(1) |]
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#             ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                   ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.separator.ocaml
+#                      ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                           ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                            ^^^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml meta.method-call.ocaml
+#                                   ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                         ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                          ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                           ^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                                            ^^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+>      else arg
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^^^^^ source.ocaml meta.object.ocaml
+>  | Ifloattest((Ceq|Cne|Cgt|Cge), _) ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^^^^^^^^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml entity.name.type.variant.ocaml
+#              ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                    ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                       ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                        ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                           ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.separator.match-option.ocaml
+#                            ^^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml entity.name.type.variant.ocaml
+#                               ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                                ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml
+#                                  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml constant.language.universal-match.ocaml
+#                                   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml meta.match-option.ocaml punctuation.definition.match-option.ocaml
+#                                    ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#                                     ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* Second argument can be on stack, first must be in register *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                                    ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      if stackp arg.(0)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#        ^^^^^^^^^^^^ source.ocaml meta.object.ocaml
+#                    ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+#                     ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                      ^ source.ocaml meta.object.ocaml meta.paren-group.ocaml
+>      then [| self#makereg arg.(0); arg.(1) |]
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^ source.ocaml meta.object.ocaml
+#           ^^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.definition.array.begin.ocaml
+#             ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                  ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#                   ^^^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml meta.method-call.ocaml
+#                          ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                               ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                 ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                  ^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.separator.ocaml
+#                                   ^^^^^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                                        ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                         ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml constant.numeric.integer.ocaml
+#                                          ^ source.ocaml meta.object.ocaml meta.array.ocaml meta.paren-group.ocaml
+#                                           ^ source.ocaml meta.object.ocaml meta.array.ocaml
+#                                            ^^ source.ocaml meta.object.ocaml meta.array.ocaml punctuation.definition.array.end.ocaml
+>      else arg
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^^^ source.ocaml meta.object.ocaml keyword.control.ocaml
+#          ^^^^^ source.ocaml meta.object.ocaml
+>  | _ ->
+#^^ source.ocaml meta.object.ocaml
+#  ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml keyword.control.match-definition.ocaml
+#   ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#    ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml constant.language.universal-match.ocaml
+#     ^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml
+#      ^^ source.ocaml meta.object.ocaml meta.pattern-match.ocaml punctuation.separator.match-definition.ocaml
+>      (* The argument(s) can be either in register or on stack *)
+#^^^^^^ source.ocaml meta.object.ocaml
+#      ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml
+#        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.object.ocaml comment.block.ocaml
+#                                                               ^^ source.ocaml meta.object.ocaml comment.block.ocaml punctuation.definition.comment.end.ocaml
+>      arg
+#^^^^^^^^^^ source.ocaml meta.object.ocaml
+>
+>end
+#^^^ source.ocaml meta.object.ocaml keyword.control.object.ocaml
+>
+>let fundecl f =
+#^^^ source.ocaml meta.function.ocaml keyword.other.function-definition.ocaml
+#   ^ source.ocaml meta.function.ocaml
+#    ^^^^^^^ source.ocaml meta.function.ocaml entity.name.function.ocaml
+#           ^ source.ocaml meta.function.ocaml
+#            ^ source.ocaml meta.function.ocaml variable.parameter.ocaml
+#             ^ source.ocaml meta.function.ocaml
+#              ^ source.ocaml meta.function.ocaml keyword.operator.ocaml
+>  (new reload)#fundecl f
+#^^ source.ocaml
+#  ^ source.ocaml meta.paren-group.ocaml
+#   ^^^ source.ocaml meta.paren-group.ocaml keyword.other.ocaml
+#      ^^^^^^^ source.ocaml meta.paren-group.ocaml
+#             ^ source.ocaml meta.paren-group.ocaml
+#              ^ source.ocaml meta.method-call.ocaml punctuation.separator.method-call.ocaml
+#               ^^^^^^^ source.ocaml meta.method-call.ocaml
+#                      ^^^ source.ocaml
+>
