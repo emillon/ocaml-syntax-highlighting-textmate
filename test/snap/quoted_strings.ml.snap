@@ -28,78 +28,28 @@
 #         ^^^^^^^ source.ocaml
 >    {|
 #^^^^ source.ocaml
-#    ^ source.ocaml meta.record.ocaml punctuation.definition.record.ocaml
-#     ^ source.ocaml meta.record.ocaml keyword.operator.infix.ocaml
+#    ^^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
 >(rule
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
+#^^^^^^ source.ocaml string.quoted.double.ocaml
 > (targets %s.output)
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#  ^^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#          ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#           ^^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                   ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#^^^^^^^^^^^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 > (deps .ocamlformat %s)
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#  ^^^^^^^^^^^^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                    ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#                     ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                      ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 > (action
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#  ^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 >   (with-outputs-to %%{targets}
-#^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#   ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#    ^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.control.ocaml
-#        ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#         ^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#                 ^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.control.ocaml
-#                   ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                    ^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#                      ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.record.ocaml punctuation.definition.record.ocaml
-#                       ^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.record.ocaml
-#                              ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 >     (system "%s%%{bin:ocamlformat}%s %%{dep:%s}"))))
-#^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#     ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#      ^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#             ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml string.quoted.double.ocaml punctuation.definition.string.begin.ocaml
-#              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml string.quoted.double.ocaml
-#                                                ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
-#                                                 ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                                                  ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                                                   ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                                                    ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 >
 >(alias
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
+#^^^^^^^ source.ocaml string.quoted.double.ocaml
 > (name runtest)
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#  ^^^^^^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#              ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
+#^^^^^^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 > (action (diff %s %s.output)))
-#^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
-# ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#  ^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#         ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#          ^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#               ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#                ^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                  ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml keyword.operator.infix.ocaml
-#                   ^^^^^^^^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                           ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                            ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml meta.paren-group.ocaml
-#                             ^ source.ocaml meta.record.ocaml meta.paren-group.ocaml
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ocaml string.quoted.double.ocaml
 >|}
-#^ source.ocaml meta.record.ocaml keyword.operator.infix.ocaml
-# ^ source.ocaml meta.record.ocaml punctuation.definition.record.ocaml
+#^^ source.ocaml string.quoted.double.ocaml punctuation.definition.string.end.ocaml
 >
 >(** This is also a string *)
 #^^ source.ocaml comment.block.ocaml punctuation.definition.comment.begin.ocaml

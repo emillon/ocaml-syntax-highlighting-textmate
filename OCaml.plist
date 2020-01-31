@@ -434,7 +434,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(\{)</string>
+			<string>(\{)(?!\|)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -1774,6 +1774,34 @@
 							<string>invalid.illegal.character.string.escape</string>
 						</dict>
 					</array>
+				</dict>
+                                <dict>
+					<key>begin</key>
+                                        <string>(\{\|)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.ocaml</string>
+						</dict>
+					</dict>
+					<key>end</key>
+                                        <string>(\|\})</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.ocaml</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.ocaml</string>
+                                        <!-- TODO: patterns -->
+                                        <!-- TODO: order with record -->
+                                        <!-- TODO: tags -->
+                                        <!-- TODO: escape begin? -->
 				</dict>
 			</array>
 		</dict>
