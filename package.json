@@ -4,7 +4,8 @@
     "vscode-tmgrammar-test": "^0.0.8"
   },
   "scripts": {
-    "test": "yarn run test:snap",
+    "test": "yarn run test:unit && yarn run test:snap",
+    "test:unit": "vscode-tmgrammar-test -g OCaml.plist -s source.ocaml -t 'test/unit/*.ml'",
     "test:snap": "vscode-tmgrammar-snap -g OCaml.plist -s source.ocaml -t 'test/snap/*.ml'",
     "test:snap:update": "vscode-tmgrammar-snap -g OCaml.plist -s source.ocaml -t 'test/snap/*.ml' -u"
   }
