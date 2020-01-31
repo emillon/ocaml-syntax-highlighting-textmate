@@ -5,6 +5,7 @@
   },
   "scripts": {
     "test": "yarn run test:snap",
-    "test:snap": "vscode-tmgrammar-snap -g OCaml.plist -s source.ocaml -t 'test/snap/*.ml'"
+    "test:snap": "vscode-tmgrammar-snap -g OCaml.plist -s source.ocaml -t 'test/snap/*.ml'",
+    "test:snap:update": "vscode-tmgrammar-snap -g OCaml.plist -s source.ocaml -t 'test/snap/*.ml' -u"
   }
 }
